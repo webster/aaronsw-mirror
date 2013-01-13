@@ -1,0 +1,58 @@
+<html>
+<!-- Mirrored from www.aaronsw.com/2002/codemag/ by HTTrack Website Copier/3.x [XR&CO'2010], Sun, 13 Jan 2013 01:04:38 GMT -->
+<head>
+<title>Annals of Planet Hacking</title>
+<style type="text/css">
+h1 { font-family: Didot; font-size: 3em; text-align: center; }
+.s { font-size: .4em; }
+.sidebar { float: right; width: 30em; padding-left: 1em;  }
+h2 { text-align: center; font-family: "Gill Sans"; font-weight: normal; }
+.hack h3 { font-size: 1em; text-align: center; }
+.hack { border: 1px solid #A8DDA0; background-color: #EBFFEE; padding: 0 .5em 0 .5em; margin-bottom: .7em; }
+.author { color: gray; margin-bottom: 0em; padding-bottom: 0em; }
+</style>
+</head><body>
+<h1>Annals of Planet Hacking<br /><span class="s">~ est. 2003 ~</span></h1>
+
+<p> <a href="index.html">About</a> | <a href="#">Archives</a> | <a href="#">Contribute</a> </p>
+
+<div class="sidebar">
+
+<div class="hack">
+<h3>similarity = len(zip(a+b))/len(zip(a))+len(zip(b))</h3>
+
+<p>The above formula (where zip is a compression algorithm) can be used to get a similarity ratio for two documents. If you have a bunch of documents that evolved from one another (such as chain letters or DNA), the NxN matrix of similarity ratios can then be fed into a <a href="../../../external.html?link=http://helix.biology.mcmaster.ca/721/outline2/node47.html">phylogeny reconstructor</a> to guess the evolutionary tree that created them. Practical application? <a href="../../../external.html?link=http://dna.cs.ucsb.edu/SID/">Detecting plagiarism.</a></p>
+
+<p><a href="../../../external.html?link=http://www.math.uwaterloo.ca/~mli/chain.html">Link</a>, <a href="../../../external.html?link=http://www.wikipedia.org/wiki/Algorithmic_information_theory">Theory</a></p>
+</div>
+
+<div class="hack">
+<h3>Google: web search for a planet via 15K PCs</h3>
+
+<p>When you query Google: You ask a DNS server which sends you to a local load balancer which sends you to a Google Web server which sends your query to an index shard which sends your query to one of its member identical PCs which sends back a bunch of docIDs which are looked up in another shard which gets you the title, URL, and excerpt which is turned into your results page. Now do it fast and cheap.</p>
+
+<p><a href="../../../external.html?link=http://www.google.com/">Link</a>, <a href="../../../external.html?link=http://dlib.computer.org/mi/books/mi2003/pdf/m2022.pdf">Details</a></p>
+</div>
+
+<div class="hack">
+<h3>music signatures + commodity cluster = Shazam</h3>
+
+<p>Shazam took 1.7M songs, split them into 10ms segments, and replaced each segment with its highest and lowest frequencies to get a signature. The result was distributed across 70 commodity PCs which store it all in RAM for speed. A user calls them and holds their phone up to a song for 15 seconds. Shazam converts their input to a signature and tries to match it against their database. Now available in the UK; US next year. Each call is 50p (~75 cents), added to your mobile phone bill.</p>
+
+<p><a href="../../../external.html?link=http://www.shazam.com/">Link</a>, <a href="../../../external.html?link=http://www.sciam.com/print_version.cfm?articleID=00056233-1F4D-1EB7-BDC0809EC588EEDF">Review</a></p>
+
+<p>Related: <a href="../../../external.html?link=http://citeseer.nj.nec.com/blackburn97search.html">Search By Humming</a>, reportedly being worked on by Philips. </p>
+</div>
+</div>
+
+<h3><a href="#">Hacking The Xbox: The Inside Story</a></h3>
+<p class="author">Andrew ``bunnie'' Huang, MIT</p>
+<p>A discussion of the Xbox security mechanisms and other advanced hacking topics, with an emphasis on educating the readers on the important subjects of computer security and reverse engineering.</p>
+
+<h3><a href="#">How I Learned to Stop Worrying and Love the Hash: The Making of Khashmir</a></h3>
+<p class="author">Dr. Burris T. Ewell, Khashmir Project</p>
+<p>Once upon a time, decentralized networks were slow and burdensome, using tons of bandwidth for communication and coordination. Distributed Hash Tables (DHTs) changed all that, allowing vast decentralized databases to be built with ease and yet have no central point of control. We look at the various DHTs and how they work, and investigate the specifics of Khashmir, a Python implementation of the Kandemlia DHT.</p>
+</body>
+
+<!-- Mirrored from www.aaronsw.com/2002/codemag/ by HTTrack Website Copier/3.x [XR&CO'2010], Sun, 13 Jan 2013 01:04:38 GMT -->
+</html>

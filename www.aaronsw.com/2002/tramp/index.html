@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+
+<!-- Mirrored from www.aaronsw.com/2002/tramp/ by HTTrack Website Copier/3.x [XR&CO'2010], Sun, 13 Jan 2013 01:12:55 GMT -->
+<head>
+  <title>TRAMP: Makes RDF look like Python data structures.</title>
+  <link rel="stylesheet" type="text/css" href="../../style.css" />
+</head>
+<body>
+<div id="head">
+  <h1>TRAMP: Makes RDF look like Python data structures.</h1>
+  <span class="description">Harmful to wood rats.</span>
+</div>
+<div class="content">
+
+
+<p>RDF/XML got you down? Tired of having to go through contortions to deal with data? Want to write Python and be standards-compatible at the same time? Need a module to implement the psuedo-code you had on your slides? <strong>TRAMP may or may not be the answer to these problems!</strong></p>
+
+<p>TRAMP makes it trivial to read those confusing RDF/XML files:</p>
+
+<pre>
+# Find Yo-Yo:
+YoYo = store.triples(None, foaf.homepage, "http://yoyo.example.org/")
+# Print essential details:
+print "Name:", YoYo[foaf.name]
+print "Age:", YoYo[foaf.age]
+print "Sex:", YoYo[foaf.sex]
+print "Location:", YoYo[foaf.location]
+</pre>
+
+<p>Wasn't that stupendously simple, natural and easy? And TRAMP lets you set RDF properties too:</p>
+
+<pre>
+YoYo[gov.enemyCombatantStatus] = gov.UnderConsideration
+</pre>
+
+<p>Imagine the fun you'll have! Yes, RDF just a module away, as easy to use as a dictionary.</p>
+<p><strong>Download it today:</strong> <a href="tramp.py">tramp.py</a>, <a href="../aaronrdf.py">rdf.py</a>, <a href="../../../external.html?link=http://rdflib.net/stable/">rdflib</a>.</p>
+
+</div>
+<div class="footer">
+  <address><a href="../../index.html">Aaron Swartz</a> (<a href="mailto:me@aaronsw.com">me@aaronsw.com</a>)</address>
+</div></body>
+
+<!-- Mirrored from www.aaronsw.com/2002/tramp/ by HTTrack Website Copier/3.x [XR&CO'2010], Sun, 13 Jan 2013 01:12:55 GMT -->
+</html>

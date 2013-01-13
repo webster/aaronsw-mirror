@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+
+<!-- Mirrored from www.aaronsw.com/weblog/000918 by HTTrack Website Copier/3.x [XR&CO'2010], Sun, 13 Jan 2013 01:04:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf8"><!-- /Added by HTTrack -->
+<head>
+	<title>xmltramp (Aaron Swartz: The Weblog)</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="index.xml" />
+	<link rel="home" href="index.html" title="Home" />	<link rel="prev" href="000917.html" title="Media Concentration" />	<link rel="next" href="000921.html" title="Matrix Unloaded" />
+<!--
+
+-->
+
+</head>
+<body>	
+<div id="banner">
+	<h1>xmltramp</h1>
+</div>
+
+<div class="content">
+<p>In trying to write some code to use <a href="../../external.html?link=http://developers.technorati.com/">the new Technorati API</a>, I noticed that all the tools for accessing XML documents <em>sucked</em>. So I wrote my own: <a href="../2002/xmltramp/index.html">xmltramp</a>. It makes handling XML documents in Python a piece of cake:</p>
+
+<pre>
+>>> d = load(URL)
+>>> d
+&lt;document>
+>>> d._dir
+[&lt;result>, &lt;item>, &lt;item>, ...]
+>>> str(d.document.weblog.name)
+"Internet Alchemy"
+</pre>
+
+<p>This was really fun code to write. I thought of the ideal UI for using XML documents, wrote up an example interactive session, and then implemented it. First I wrote the XML objects and then I wrote a SAX parser to build them. The whole thing is under 80 lines (sans tests). The whole thing took an hour and a half.</p>
+
+<p><strong>Python geeks:</strong> Do you have any suggestions on a better way to get output from a SAX parser? Right now I&#8217;m having it raise an exception with the object I want as the payload. This seems pretty klugey. Is there a better way? <strong>Update:</strong> Version 1.1 now passes the result through an attribute in the ContentHandler.</p>
+
+<p>I&#8217;d love to <a href="mailto:xmltramp@aaronsw.com">hear your thoughts</a>. There are some obvious features to be added (serialization, for example) but I think this does enough for now. Time to go use it!</p>
+
+<p class="posted">posted May 12, 2003 01:28 PM (<a class="category" href="cat_technology.html">Technology</a>)  <a href="000918.html" rel="bookmark">#</a></p>
+</div>
+
+<div class="box">
+<h2>Nearby</h2>
+<p class="menu"><a href="000917.html" title="Media Concentration">&laquo; prev</a> | <a href="index.html">up</a> | <a href="000921.html" title="Matrix Unloaded">next &raquo;</a></p>
+
+<p><a href="000901.html">Illinois&#8217;s state &#8220;super-DMCA&#8221;</a><br />
+<a href="000904.html">Locked in the Trunk</a><br />
+<a href="000913.html">Escaping the Trunk</a><br />
+<a href="000915.html">Cox News</a><br />
+<a href="000917.html">Media Concentration</a><br />
+<strong>xmltramp</strong><br />
+<a href="000921.html">Matrix Unloaded</a><br />
+<a href="000923.html">MediaCon: Lobbying</a><br />
+<a href="000924.html">1201 Hearings</a><br />
+<a href="000929.html">Joss Quest</a><br />
+<a href="000930.html">RFC: Annals of Planet Hacking</a><br /></p>
+</div>
+
+<address><a href="../index.html">Aaron Swartz</a> (<a href="mailto:me@aaronsw.com">me@aaronsw.com</a>)</address>
+</body>
+
+<!-- Mirrored from www.aaronsw.com/weblog/000918 by HTTrack Website Copier/3.x [XR&CO'2010], Sun, 13 Jan 2013 01:04:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf8"><!-- /Added by HTTrack -->
+</html>

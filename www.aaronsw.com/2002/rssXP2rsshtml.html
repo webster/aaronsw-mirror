@@ -1,0 +1,77 @@
+<xsl:transform 
+    xmlns:xsl  ="http://www.w3.org/1999/XSL/Transform" version="1.0"
+    xmlns:rdf  ="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns      ="http://purl.org/rss/1.0/"
+    xmlns:dc   ="http://purl.org/dc/elements/1.1/" 
+    xmlns:h    ="http://www.w3.org/1999/xhtml"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:uri  ="http://www.w3.org/2000/07/uri43/uri.xsl?template="
+    xmlns:hr   ="http://www.w3.org/2000/08/w3c-synd/#"
+    exclude-result-prefixes="uri"
+    >
+
+<xsl:import href="http://www.w3.org/2000/07/uri43/uri.xsl"/>
+<xsl:param name="xmlfile"/>
+
+<xsl:variable name="Profile" select='"http://www.w3.org/2000/08/w3c-synd/#"'/>
+
+<xsl:output method="xml" indent="yes" cdata-section-elements="content:encoded" />
+<xsl:template match='h:html[h:head/@profile="http://www.aaronsw.com/2002/rssXP?"]'>
+  <rdf:RDF>
+    <channel rdf:about="{$xmlfile}">
+      <title><xsl:value-of select="h:head/h:title"/></title>
+      <description>
+	<xsl:value-of select='.//*[@class="description"]'/>
+      </description>
+      <link><xsl:value-of select="$xmlfile"/></link> <!-- for RSS 0.9x consumers -->
+      <items>
+       <rdf:Seq>
+
+        <!-- RSS now uses a table of contents list for channel order -->
+        <xsl:for-each select='.//*[@class="item"]'>
+          <xsl:variable name="itemURI">
+  	    <xsl:call-template name="uri:expand">
+	      <xsl:with-param name="there"
+		      select='.//h:a[@rel="bookmark"]/@href'/>
+              <xsl:with-param name="base" select="$xmlfile"/>
+	    </xsl:call-template>
+	   </xsl:variable>
+        <rdf:li rdf:resource="{$itemURI}"/>
+      </xsl:for-each>
+
+
+       </rdf:Seq>
+      </items>
+    </channel>
+
+      <xsl:for-each select='.//*[@class="item"]'>
+        <xsl:variable name="itemURI">
+	  <xsl:call-template name="uri:expand">
+	    <xsl:with-param name="there"
+		      select='.//h:a[@rel="bookmark"]/@href'/>
+            <xsl:with-param name="base" select="$xmlfile"/>
+	  </xsl:call-template>
+	</xsl:variable>
+
+        <item rdf:about="{$itemURI}">
+	  <title><xsl:value-of select='normalize-space(.//*[@class="title"])'/></title>
+	<content:literal rdf:parseType="Literal" xmlns="http://www.w3.org/1999/xhtml">
+		<xsl:apply-templates />
+	</content:literal>
+	  <link><xsl:value-of select="$itemURI"/></link>
+	</item>
+      </xsl:for-each>
+  </rdf:RDF>
+</xsl:template>
+
+<xsl:template match="h:*">
+<xsl:element name="{local-name(.)}">
+ <xsl:copy-of select="@*"/>
+<xsl:apply-templates/>
+</xsl:element>
+</xsl:template>
+
+<!-- don't pass text thru 
+<xsl:template match="text()|@*"></xsl:template>-->
+
+</xsl:transform>

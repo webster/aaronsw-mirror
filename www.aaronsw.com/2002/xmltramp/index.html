@@ -1,0 +1,120 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+
+<!-- Mirrored from www.aaronsw.com/2002/xmltramp/ by HTTrack Website Copier/3.x [XR&CO'2010], Sun, 13 Jan 2013 01:07:00 GMT -->
+<head>
+  <title>xmltramp: Make XML documents easily accessible.</title>
+  <link rel="stylesheet" type="text/css" href="../../style.css" />
+  <style type="text/css">.result { color: #700 }</style>
+</head>
+<body>
+<div id="head">
+  <h1>xmltramp: Make XML documents easily accessible.</h1>
+</div>
+<div class="content">
+
+
+<p>Everyone's got their data in XML these days. You need to read it. You've looked at the other XML APIs and they all contain miles of crud that's only necessary when parsing the most arcane documents. Wouldn't it be nice to have an easy-to-use API for the normal XML documents you deal with? That's xmltramp:</p>
+
+<pre>
+>>> import xmltramp
+>>> doc = xmltramp.Namespace("http://example.org/bar")
+>>> bbc = xmltramp.Namespace("http://example.org/bbc")
+>>> dc = xmltramp.Namespace("http://purl.org/dc/elements/1.1/")
+>>> d = xmltramp.parse("""&lt;doc version="2.7182818284590451"
+  xmlns="http://example.org/bar" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:bbc="http://example.org/bbc">
+	&lt;author>&lt;name>John Polk&lt;/name> and &lt;name>John Palfrey&lt;/name>&lt;/author>
+	&lt;dc:creator>John Polk&lt;/dc:creator>
+	&lt;dc:creator>John Palfrey&lt;/dc:creator>
+	&lt;bbc:show bbc:station="4">Buffy&lt;/bbc:show>
+&lt;/doc>""")
+>>> d
+<span class="result">&lt;doc version="2.7182818284590451">...&lt;/doc></span>
+>>> d('version')
+<span class="result">'2.7182818284590451'</span>
+>>> d(version='2.0')
+>>> d('version')
+<span class="result">'2.0'</sppan>
+>>> d._dir
+<span class="result">[&lt;author>...&lt;/author>, &lt;dc:creator>...&lt;/dc:creator>, &lt;dc:creator>...&lt;/dc:creator>, &lt;bbc:show bbc:station="4">...&lt;/bbc:show>]</span>
+>>> d._name
+<span class="result">(u'http://example.org/bar', u'doc')</span>
+>>> d[0]                # First child.
+<span class="result">&lt;author>...&lt;/author></span>
+>>> d.author            # First author.
+<span class="result">&lt;author>...&lt;/author></span>
+>>> str(d.author)
+<span class="result">'John Polk and John Palfrey'</span>
+>>> d[dc.creator]        # First dc:creator.
+<span class="result">&lt;dc:creator>...&lt;/dc:creator></span>
+>>> d[dc.creator:]       # All creators.
+<span class="result">[&lt;dc:creator>...&lt;/dc:creator>, &lt;dc:creator>...&lt;/dc:creator>]</span>
+>>> d[dc.creator] = "Me!!!"
+>>> str(d[dc.creator])
+<span class="result">'Me!!!'</span>
+>>> d[bbc.show](bbc.station)
+<span class="result">'4'</span>
+>>> d[bbc.show](bbc.station, '5')
+>>> d[bbc.show](bbc.station)
+<span class="result">'5'</span>
+
+</pre>
+
+<p><strong>Download:</strong> <a href="xmltramp.py">xmltramp.py</a>.</p>
+
+<dl>
+<dt>PyPI</dt>
+<dd><code>easy_install <a href="../../../external.html?link=http://pypi.python.org/pypi/xmltramp/">xmltramp</a></code></dd>
+<dt>RPM</dt>
+<dd><code>yum install <a href="../../../external.html?link=http://rpmfind.net/linux/rpm2html/search.php?query=python-xmltramp">python-xmltramp</a></code></dd>
+</dl>
+
+<h2>Related</h2>
+
+<p>Lots of people seem to have done similar things for other languages. Here are the ones that I know about:</p>
+
+<dl>
+<dt>Perl</dt>
+<dd><a href="../../../external.html?link=http://perlmonks.org/index.pl?node_id=257634">XML::Smart</a></dd>
+<dt>Tcl</dt>
+<dd>I just remembered I wrote essentially the same API for Tcl four years ago (1999).</dd>
+<dt>RDF</dt><dd><a href="../tramp/index.html">TRAMP</a></dd>
+<dt>HTML</dt>
+  <dd><a href="../../../external.html?link=http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a></dd>
+  <dd><a href="../../../external.html?link=http://www.entrian.com/PyMeld/">PyMeld</a></dd>
+</dl>
+
+<p>Use xmltramp to access Web services: <a href="technorati.py">Technorati</a>, Amazon (coming soon).</p>
+
+<h2>Endorsements</h2>
+
+<p>"xmltramp looked enticing to me when i first saw it, but it's actually a quick-and-dirty hack that corrupts data" -- <a href="../../../external.html?link=http://diveintomark.org/archives/blinks/2003/12/">Mark Pilgrim</a></p>
+
+<p>"xmltramp is good software. It's the simplest way I know of to handle XML content. Sort of like DOM but without all the obnoxious function calls." -- <a href="../../../external.html?link=http://www.nelson.monkey.org/~nelson/weblog/tech/good/xmltramp.html">Nelson Minar</a></p>
+
+<h2>History</h2>
+<p>
+2008-08-01: <a href="xmltramp-2.18.py">2.18</a> released. Fix KeyError reporting.<br />
+2006-04-20: <a href="xmltramp-2.17.py">2.17</a> released. Small bug fix in error message.<br />
+2003-09-01: <a href="xmltramp-2.16.py">2.16</a> released. Changed namespace prefix storage to a stack to solve ambiguity in SAX spec. (tx Sam Ruby)<br />
+2003-09-01: <a href="xmltramp-2.15.py">2.15</a> released. Quotes quotes in attributes. (tx Sam Ruby)<br />
+2003-08-31: <a href="xmltramp-2.14.py">2.14</a> released. Quotes attributes, better Unicode, accepts all slices. (tx Marc-Antoine)<br />
+2003-08-31: <a href="xmltramp-2.13.py">2.13</a> released. Fixed a bug with encoding "]]>". (tx Sam Ruby)<br />
+2003-08-05: <a href="xmltramp-2.12.py">2.12</a> released. Added support for automagical xml: namespace.<br />
+2003-08-03: <a href="xmltramp-2.11.py">2.11</a> released. Fixed bug that caused problem with 2.3 (raised KeyError instead of AttributeError). (Thanks, Marc-Antoine!)<br />
+2003-07-09: <a href="xmltramp-2.1.py">2.1</a> released. Quotes content and collapes HTML tags.<br />
+2003-05-14: <a href="xmltramp-2.0.py">2.0</a> released. Namespace, unicode, all-elements, mixed content, and setting support.<br />
+2003-05-14: <a href="xmltramp-1.22.py">1.22</a> released. Replaced "is int" for compatibility with Python 2.1.<br />
+2003-05-13: <a href="xmltramp-1.21.py">1.21</a> released. Uses handlers compatible with older versions of PyXML.<br />
+2003-05-13: <a href="xmltramp-1.2.py">1.2</a> released. Keeps whitespace, supports attribute access, added serialization (foo.__repr__(1)).<br />
+2003-05-12: <a href="xmltramp-1.1.py">1.1</a> released. Got rid of throw/catch communication kluge.<br />
+2003-05-12: <a href="xmltramp-1.0.py">1.0</a> released. First version.
+</p>
+</div>
+<div class="footer">
+  <address><a href="../../index.html">Aaron Swartz</a> (<a href="mailto:me@aaronsw.com">me@aaronsw.com</a>)</address>
+</div></body>
+
+<!-- Mirrored from www.aaronsw.com/2002/xmltramp/ by HTTrack Website Copier/3.x [XR&CO'2010], Sun, 13 Jan 2013 01:07:04 GMT -->
+</html>
